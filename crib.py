@@ -2,6 +2,11 @@
 from otp import ciphertexts, strxor, KEY_LENGTH
 
 fragments = (
+    # 15 most-common trigrams
+    'the', 'and', 'tha', 'ent', 'ion', 'tio', 'for', 'nde',
+    'has', 'nce', 'edt', 'tis', 'oft', 'sth', 'men',
+
+    # Some chosen words (stolen from the plaintext  :O)
     ' the ',
     ' in order to ',
     ' chipotle',
