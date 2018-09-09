@@ -13,29 +13,34 @@ messages = (
     "This is my most super secret target message"
 )
 
+
 def strxor(a, b):
     if len(a) > len(b):
         return "".join([chr(ord(x) ^ ord(y)) for (x, y) in zip(a[:len(b)], b)])
     else:
         return "".join([chr(ord(x) ^ ord(y)) for (x, y) in zip(a, b[:len(a)])])
 
-def main():
+
+def ciphertexts(msgs=messages):
     ## Generate ciphertexts from messages using random (but reused) key
     key = open("/dev/urandom").read(1024)
-    ciphertexts = [strxor(key, msg) for msg in messages]
+    return [strxor(key, msg) for msg in msgs]
 
+
+def main():
+    ctexts = ciphertexts()
     # Deduce partial key from scratch using spaces as a crib
-    key=[" "] * len(max(ciphertexts, key=len))
-    for a in range(0,len(ciphertexts)):
-        for b in range(0,len(ciphertexts)):
+    key=[" "] * len(max(ctexts, key=len))
+    for a in range(0,len(ctexts)):
+        for b in range(0,len(ctexts)):
             if a == b: pass
-            xored = strxor(ciphertexts[a],ciphertexts[b])
+            xored = strxor(ctexts[a],ctexts[b])
             for p in range(0,len(xored)):
                 if xored[p].isalpha():
-                        key[p] = strxor(xored[p].lower(),ciphertexts[a][p])
+                        key[p] = strxor(xored[p].lower(),ctexts[a][p])
 
     # Attempt decryption of all ciphertexts using partial key
-    for ciphertext in ciphertexts:
+    for ciphertext in ctexts:
         attempt=[" "] * len(ciphertext)
         for index, keychar in enumerate(key):
             if index < len(ciphertext) and keychar is not ' ':
