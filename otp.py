@@ -14,6 +14,7 @@ messages = (
     "This is my most super secret target message"
 )
 
+KEY_LENGTH = 1024
 
 def strxor(a, b):
     if len(a) > len(b):
@@ -24,7 +25,7 @@ def strxor(a, b):
 
 def ciphertexts(msgs=messages):
     ## Generate ciphertexts from messages using random (but reused) key
-    key = open("/dev/urandom").read(1024)
+    key = open("/dev/urandom").read(KEY_LENGTH)
     return [strxor(key, msg) for msg in msgs]
 
 
