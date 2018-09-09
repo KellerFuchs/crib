@@ -2,6 +2,10 @@
 from otp import ciphertexts, strxor, KEY_LENGTH
 
 fragments = (
+    # Most-frequenct four-letter words in English
+    'that', 'with', 'have', 'this', 'will', 'your', 'from',
+    'they', 'know', 'want', 'been', 'good', 'much', 'some', 'time',
+
     # 15 most-common trigrams
     'the', 'and', 'tha', 'ent', 'ion', 'tio', 'for', 'nde',
     'has', 'nce', 'edt', 'tis', 'oft', 'sth', 'men',
@@ -14,6 +18,7 @@ fragments = (
     'the chocolate',
     ' is ',
     'bunnies',
+    'My wife',
     'death',
 )
 
