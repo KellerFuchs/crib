@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 messages = (
 
     "This is the secret message one. It is the best one",
