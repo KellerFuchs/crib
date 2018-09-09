@@ -51,15 +51,13 @@ if __name__ == "__main__":
                 # You should be saving the matches across pairs
                 # and handle overlapping matches
                 matches = sorted(matches, key=lambda (p, _f, _c): p)
-                c1, c2 = '', ''
+                print('Ciphertexts %i and %i' % (i1, i2))
+                print('\tMatches:')
                 for (position, fragment, crib) in matches:
-                    c1 += '?' * (position - len(c1))
-                    c2 += '?' * (position - len(c2))
-                    c1 += fragment
-                    c2 += crib
+                    s1 = ('?' * position) + fragment + ('?' * (len(xord) - position - len(fragment)))
+                    s2 = ('?' * position) + crib     + ('?' * (len(xord) - position - len(fragment)))
+                    print('\t\t%s\n\t\t%s' % (s1, s2))
 
-                c1 += '?' * (len(ctx1) - len(c1))
-                c2 += '?' * (len(ctx2) - len(c2))
-                print('Matches with ciphertexts %i and %i' % (i1, i2))
-                print('\t%s' % c1)
-                print('\t%s' % c2)
+                print('\tPlaintexts:')
+                from otp import messages
+                print('\t\t%s\n\t\t%s' % (messages[i1], messages[i2]))
